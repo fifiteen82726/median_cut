@@ -17,8 +17,22 @@ class MC():
   def median_cut(self):
     img_array = self.img_a
     # current_cut, target_cut
-    self.helper(img_array, 0, 1)
-    # self.generate_compressive_image()
+    self.helper(img_array, 0, 8)
+    self.generate_compressive_image()
+
+  def generate_compressive_image(self):
+    for n in [1,2,4,8]:
+      for i in xrange(self.rows):
+        for j in xrange(self.cols):
+          pixel_v = self.img[i][j]
+          self.q_image[n][i][j] = self.mapping[n][tuple(pixel_v)]
+
+      self.save_image(self.q_image[n], n)
+
+  def save_image(self, image, bit_number):
+    img = Image.fromarray(image)
+    name = 'image' + str(bit_number) + '.bmp'
+    img.save(name)
 
   def helper(self, image_arr, current_cut, target):
     if current_cut >= target:
@@ -46,16 +60,22 @@ class MC():
     for pixel in image_arr:
       self.mapping[current_cut][tuple(pixel)] = mean
 
-
-
-image = np.asarray(Image.open('img/4pixel-image.bmp').convert('RGB'))
-bits = [1,2,4,8]
+image = np.asarray(Image.open('img/t1.jpg').convert('RGB'))
 MC(image).median_cut()
 
 
+#
+# data = np.zeros((2, 2, 3), dtype=np.uint8)
+#
+# # a = [[(0, 0, 0),(0, 0, 0)], [0, 0, 0], [0, 0, 0]]]
+# img = Image.fromarray(data)
+# # img.fromarray(data)
+# img.save('test.bmp')
+#
+# print data
 
 
-data = np.zeros((2, 2, 3), dtype=np.uint8)
+
 
 
 

@@ -1,4 +1,3 @@
-from matplotlib import pyplot as plt
 from PIL import Image
 import numpy as np
 
@@ -62,21 +61,3 @@ class MC():
 
 image = np.asarray(Image.open('img/t1.jpg').convert('RGB'))
 MC(image).median_cut()
-
-
-#
-# data = np.zeros((2, 2, 3), dtype=np.uint8)
-#
-# # a = [[(0, 0, 0),(0, 0, 0)], [0, 0, 0], [0, 0, 0]]]
-# img = Image.fromarray(data)
-# # img.fromarray(data)
-# img.save('test.bmp')
-#
-# print data
-
-
-
-
-
-
-

@@ -19,6 +19,7 @@ class MC():
     self.helper(img_array, 0, 8)
     self.generate_compressive_image()
 
+  # generate 4 compressive image by given bits number and created mapping table
   def generate_compressive_image(self):
     for n in [1,2,4,8]:
       for i in xrange(self.rows):
@@ -30,9 +31,10 @@ class MC():
 
   def save_image(self, image, bit_number):
     img = Image.fromarray(image)
-    name = 'image' + str(bit_number) + '.bmp'
+    name = 'image' + str(bit_number) + '.jpg'
     img.save(name)
 
+  # Recursively partition the pixel group and make mapping tables
   def helper(self, image_arr, current_cut, target):
     if current_cut >= target:
       return
@@ -49,11 +51,13 @@ class MC():
     self.helper(left, current_cut, target)
     self.helper(right, current_cut, target)
 
+  # It's a sub function of helper, use it to sort the pixel array by maximun difference value of dimensional value
   def sort_by_max_difference_dimension(self, image_arr):
     diff_a = np.amax(image_arr, axis=0) - np.amin(image_arr, axis=0)
     index = np.argmax(diff_a)
     image_arr.sort(key=lambda x: x[index])
 
+  # It's a sub function of helper, use it to calculate the mean value of its small group
   def compute_mean(self, image_arr, current_cut):
     mean = np.mean(image_arr, axis=0)
     for pixel in image_arr:

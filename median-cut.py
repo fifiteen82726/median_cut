@@ -31,7 +31,7 @@ class MC():
 
   def save_image(self, image, bit_number):
     img = Image.fromarray(image)
-    name = 'image' + str(bit_number) + '.jpg'
+    name = 'quantized-image' + str(bit_number) + '.jpg'
     img.save(name)
 
   # Recursively partition the pixel group and make mapping tables

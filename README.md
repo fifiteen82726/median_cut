@@ -14,6 +14,7 @@ pip install numpy
 ## Run
 ```bash
 python median-cut.py
+# Create 4 new images called quantized-image1.jpg to quantized-image4.jpg
 ```
 
 ## Result
